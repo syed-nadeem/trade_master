@@ -15,11 +15,11 @@
                     <div class="card-header p-3 pt-2">
                         <div class="">
                             <p class="text mb-0 text-capitalize">Total Registered Scrapers</p>
-                            <h5 class=" text-end mb-0">{{ total }}</h5>
+                            <h5 class=" text-end mb-0">11</h5>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
-                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                    <center><a href="#" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a></center>
                 </div>
             </div>
@@ -28,11 +28,11 @@
                     <div class="card-header p-3 pt-2">
                         <div class="">
                             <p class="text mb-0 text-capitalize">Total Scrapers Run Today</p>
-                            <h5 class=" text-end mb-0">{{ total_today }}</h5>
+                            <h5 class=" text-end mb-0">11</h5>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
-                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                    <center><a href="#" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a></center>
                 </div>
             </div>
@@ -41,11 +41,11 @@
                     <div class="card-header p-3 pt-2">
                         <div class="">
                             <p class="text mb-0 text-capitalize">Total Scrapers Successful Today</p>
-                            <h5 class=" text-end mb-0">{{ total_success }}</h5>
+                            <h5 class=" text-end mb-0">12</h5>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
-                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                    <center><a href="#" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a></center>
                 </div>
             </div>
@@ -54,11 +54,11 @@
                     <div class="card-header p-3 pt-2">
                         <div class="">
                             <p class="text mb-0 text-capitalize">Total Scrapers Failed Today</p>
-                            <h5 class=" text-end mb-0">{{ total_failed }}</h5>
+                            <h5 class=" text-end mb-0">11</h5>
                         </div>
                     </div>
                     <hr class="dark horizontal my-0">
-                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                    <center><a href="#" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a></center>
                 </div>
             </div>
@@ -126,20 +126,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for result in scrapper_info %}
                                             <tr class="flowingdown">
-                                                <td>{{ result.scrapper_name }}</td>
-                                                <td class={% if result.status == 'Failed' %} text-danger {% else %}
-                                                    text-success {% endif %}
-                                                ">{{ result.status }}
-                                                <div style="color: grey"
-                                                     class="something-inside-but-hidden text-sm">{{ result.description }}</div>
-                                                </td>
-                                                <td>{{ result.created_at }}</td>
-                                                <td>{{ result.cron_time }}</td>
-                                                <td>{{ result.period }}</td>
+                                                <td>11</td>
                                             </tr>
-                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -185,19 +174,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {% for result in aggreration_info %}
-                                            <tr class="flowingdown">
-                                                <td>{{ result.aggregation_name }}</td>
-                                                <td class={% if result.status == 'Failed' %} text-danger {% else %}
-                                                    text-success {% endif %}
-                                                ">{{ result.status }}
-                                                <div style="color: grey"
-                                                     class="something-inside-but-hidden text-sm">{{ result.description }}</div>
-                                                </td>
-                                                <td>{{ result.created_at }}</td>
 
-                                            </tr>
-                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -221,25 +198,14 @@
                     <div class="tab-pane fade show active" id="scraperslist" role="tabpanel"
                          aria-labelledby="scraperslist-tab">
                         <div class="card" style="height:500px; overflow-y: auto; overflow-x:hidden; border-radius: 0px;">
-                            {% for row in scrapper_list %}
-                                {% for key, value in row.items %}
 
                                     <div style="margin-left: 25px;">
 
                                         <h6 class="text-dark font-weight-bold">{{ key }}</h6>
                                         <div style="margin-left: 25px;">
-                                            {% for scr in value %}
-                                                <p style="margin-bottom: 7px; padding-top:0;"><span
-                                                        class="text-dark">{{ scr.name }} </span> <span
-                                                        class="text-sm text-secondary"> ({{ scr.primary_responsible }}
-                                                    {% if scr.secondary_responsible %}
-                                                        , {% endif %} {{ scr.secondary_responsible }})</span></p>
-                                                {#                                        <p style="margin-top: 0; margin-bottom: 7px; padding-top:0;" class="text-secondary text-sm">{{ scr.collection_name }} </p>#}
-                                            {% endfor %}
+
                                         </div>
                                     </div>
-                                {% endfor %}
-                            {% endfor %}
                         </div>
                     </div>
 

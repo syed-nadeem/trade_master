@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
 from .forms import LoginForm, SignUpForm
-import hashlib
-from django.contrib.auth import logout
-import traceback
+from django.contrib.auth import authenticate, login, logout
 
 
 def login_view(request):
@@ -16,18 +13,15 @@ def login_view(request):
         if form.is_valid():
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-            password = hashlib.sha256(password.encode('utf8')).hexdigest()
-            user = Users.objects.filter(email=email, password=password).first()
+            remember_me = form.cleaned_data.get("remember_me")
+            print(remember_me)
+            user = authenticate(request, username=email, password=password)
             if user is not None:
-                if user.data_authenticated:
-                    # login(request, user)
-                    request.session["user_id"] = str(user._id)
-                    request.session["username"] = user.name
-                    request.session["roles"] = user.roles
-                    # request.session.set_expiry(1000)
-                    return redirect("/")
-                else:
-                    msg = "User is not authorized."
+                login(request, user)
+                if not remember_me:
+                    # Set session to expire when the user's browser is closed
+                    request.session.set_expiry(0)
+                return redirect("/")
             else:
                 msg = 'Invalid credentials'
         else:
@@ -63,10 +57,7 @@ def register_user(request):
 
 def logout_view(request):
     try:
-        del request.session["user_id"]
         logout(request)
-
     except Exception:
-        traceback.print_exc()
         return redirect("/login/")
     return redirect("/login/")

@@ -9,7 +9,7 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = False if os.environ.get('DEBUG', 'False') == 'False' else True
+DEBUG = True # if os.environ.get('DEBUG', 'False') == 'False' else True
 ASSETS_ROOT = os.environ.get('ASSETS_ROOT', '/static/assets')
 
 ALLOWED_HOSTS = ['127.0.0.1']
@@ -88,6 +88,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTH_USER_MODEL = 'apps.authentication.CustomUser'
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -100,6 +102,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(CORE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+LOGIN_URL = '/login/'
 
 STATICFILES_DIRS = (
     os.path.join(CORE_DIR, 'apps/static'),

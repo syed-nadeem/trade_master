@@ -18,6 +18,15 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         ))
+    remember_me = forms.BooleanField(
+        required=False,
+        initial=True,
+        widget=forms.CheckboxInput(
+            attrs={
+                "class": "form-check-input"
+            }
+        )
+    )
 
 
 class SignUpForm(UserCreationForm):
