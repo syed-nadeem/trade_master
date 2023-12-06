@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Customers {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <h6 class="text-white text-capitalize ps-3">DataHub Customers</h6>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <span id="helpbtn"><i style="font-size:24px" class="fa">&#xf059;</i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table id="customers" class="table table-bordered table-striped dataTable" ,
+                                   style="width:100%">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="customerhelp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    List of authorizations in datahub. Click on line for details.<br/>
+                    Colors:<br/>
+                    <span class="text-muted">Gray</span> - Access expired<br/>
+                    <span class="text-danger">Red</span> - No access to any metering point<br/>
+                    <span class="text-success">Green</span> - Access granted within last 2 days<br/>
+                    - Normal color means active access
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+
+
+            fill_customers_datatable();
+
+            $('#customers').on('dblclick', 'tr', function () {
+                var table = $('#customers').DataTable();
+                var data = table.row(this).data();
+                window.location = "/scrappers/datahub_customers_meters/" + String(data.ID);
+
+            });
+
+
+            $(function () {
+                $("#helpbtn").click(function () {
+                    $("#customerhelp").modal("show");
+                });
+            });
+
+
+        });
+
+
+    </script>
+
+{% endblock javascripts %}

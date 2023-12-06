@@ -1,0 +1,343 @@
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+       id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+           aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0"
+           {% if 'index' in segment %} active bg-gradient-primary {% endif %}"
+        href="/">
+        <img src="{{ ASSETS_ROOT }}/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">Trade Master Data</span>
+        </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main"
+         style="overflow: visible !important;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'index' in segment %} active bg-gradient-primary {% endif %}"
+                   href="/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#denmark" class="nav-link text-white"
+                   aria-controls="pagesExamples" role="button" aria-expanded="true">
+                    <i class="material-icons opacity-10">apps</i>
+                    <span class="nav-link-text ms-2 ps-1">Denmark</span>
+                </a>
+                <div class="collapse show" id="denmark" style="">
+                    <ul class="nav ">
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#datahubcustomers">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Data Hub <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'datahub' in segment %} show {% endif %}"
+                                 id="datahubcustomers">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'datahub_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'scrappers:datahub_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#ewiicustomers">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Ewii <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'ewii' in segment %} show {% endif %}"
+                                 id="ewiicustomers">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'ewii_raw_data' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'ewii:ewii_raw_data' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'ewii_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'ewii:ewii_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#Eforsyningcustomers">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> E-forsyning <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'Eforsyning' in segment %} show {% endif %}"
+                                 id="Eforsyningcustomers">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'Eforsyning_raw_data' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'Eforsyning:Eforsyning_raw_data' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'Eforsyning_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'Eforsyning:Eforsyning_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#minforsyningcustomers">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Minforsyning <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'minforsyning' in segment %} show {% endif %}"
+                                 id="minforsyningcustomers">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'minforsyning_raw_data' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'minforsyning:minforsyning_customes_raw_data' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'minforsyning_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'minforsyning:minforsyning_customes' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#pdfraw">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> PDF <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'pdf' in segment %} show {% endif %}" id="pdfraw">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'pdf_raw' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'pdf:pdf_raw' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'pdf_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'pdf:pdf_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#danfosscustomers">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Danfoss <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'danfoss' in segment %} show {% endif %}"
+                                 id="danfosscustomers">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'danfoss_raw_data' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'danfoss:danfoss_raw_data_detail' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'danfoss_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'danfoss:danfoss_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#ems_customes">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> EMS <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'ems' in segment %} show {% endif %}"
+                                 id="ems_customes">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'ems_raw' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'ems:ems_raw_data_customers' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Raw Data </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'ems_customers' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'ems:ems_customes' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Processed Data </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#globally" class="nav-link text-white"
+                   aria-controls="pagesExamples" role="button" aria-expanded="true">
+                    <i class="material-icons opacity-10">language</i>
+                    <span class="nav-link-text ms-2 ps-1">Globally</span>
+                </a>
+                <div class="collapse show" id="globally" style="">
+                    <ul class="nav ">
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false"
+                               href="#nordpool_EU">
+                                <span class="material-icons">format_paint</span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Nordpool <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {% if 'nordpool' in segment %} show {% endif %}"
+                                 id="nordpool_EU">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white {% if 'nordpool_EU' in segment %} active bg-gradient-primary {% endif %} "
+                                           href="{% url 'nordpool_EU:nordpool_EU_price_yearly' %}">
+                                            <span class="material-icons">format_paint</span>
+                                            <span class="sidenav-normal  ms-2  ps-1"> Europe </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item mt-5">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'dynamic_data' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'raw:raw' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Dynamic Data</span>
+                </a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link text-white {% if 'lastdatainfo' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'lastdatainfo:lastdatainfo' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Last Data Details</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'profile' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:profile' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">person</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+            {% if "super_admin" in request.session.roles %}
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'roles' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:roles' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">receipt_long</i>
+                    </div>
+                    <span class="nav-link-text ms-1">User Roles</span>
+                </a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'git_branches' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:git_branches' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="margin-left: 5px;" class='fas fa-code-branch'></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Branches</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'data_migration' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:data_migration' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">library_books</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Data Migration</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'scrapper_details' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:scrapper_details' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Scrapper Details</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {% if 'sftp_details' in segment %} active bg-gradient-primary {% endif %}"
+                   href="{% url 'home:sftp_details' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">SFTP Details</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link text-white " href="{% url 'logout' %}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">directions_run</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+  

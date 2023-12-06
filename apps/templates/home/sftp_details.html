@@ -1,0 +1,160 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Roles {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <h6 class="text-white text-capitalize ps-3">SFTP Details</h6>
+
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="{% url 'home:add_sftp' %}" type="button"
+                                       class="text-white btn btn-outline-secondary ps-3">ADD
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table id="sftp_details" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Customer Name
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Username
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Host
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Port
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Server Directory
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        User Directory
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Created Datetime
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Edit
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Delete
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="sftpedit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Sftp Details</h5>
+            </div>
+            <div class="modal-body">
+                <form role="form" id="sftp_from">
+                    <div class="input-group input-group-static my-4">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" id="username"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" id="password"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                        <input type="checkbox" name="" onclick="showPassword()"> <small> &nbsp;Show Password</small>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>Customer Name</label>
+                        <input type="text" class="form-control" name="customer_name" id="customer_name"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>Host</label>
+                        <input type="text" class="form-control" name="host" id="host"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>Port</label>
+                        <input type="number" class="form-control" name="port" id="port"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>User Directory</label>
+                        <input type="text" class="form-control" name="user_direc" id="user_direc"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+                    <div class="input-group input-group-static my-4">
+                        <label>Server Directory</label>
+                        <input type="text" class="form-control" name="server_direc" id="server_direc"
+                               onfocus="focused(this)" onfocusout="defocused(this)" required>
+                    </div>
+
+                    <input type="hidden" name="sftp_id" id="sftp_id">
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="scraper_from_submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+            fill_sftp_details_datatable();
+
+            $('#sftpedit').on('submit', function (e) {
+                e.preventDefault();
+                var data = $('#sftp_from').serializeArray().reduce(function (obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+                saveSftpfrom(data);
+            });
+
+        });
+
+
+    </script>
+
+{% endblock javascripts %}

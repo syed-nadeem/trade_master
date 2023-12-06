@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Meter Month Details{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <meta id="my-parm-id" data-id="{{ meter_no | safe }}">
+    <meta id="my-parm-id1" data-id="{{ month | safe }}">
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <div class="row">
+                                <div class="col-md-11">
+                                    <h6 class="text-white text-capitalize ps-3">Meter ({{ meter_no }}) daily
+                                        ({{ month }})
+                                        Details </h6>
+                                </div>
+                                <div class="col-md-1 text-right">
+                                    <span id="helpbtn2"><i style="font-size:24px" class="fa">&#xf059;</i></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table id="meter_month_details" class="table table-bordered table-striped dataTable" ,
+                                   style="width:100%">
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="customerhelp2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <em>ID</em>: The metering point id from datahub<br/>
+                    <em>Meter number</em>: Often the number on customer's bill<br/>
+                    <em>Address</em>: Official address of meter (not including location information)<br/>
+                    <em>Type</em>: Type of meter. E17 = consumption, E18 = production<br/>
+                    <em>Interval</em>: Data granularity. PT1H = every 1 hour, PT15M = every 15 minutes<br/>
+                    <em>Last seen</em>: Timestamp of last encountered when requesting data from datahub
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function () {
+            var djangoDat = $('#my-parm-id').data();
+            var djangoDat1 = $('#my-parm-id1').data();
+            fill_meter_month_details_datatable(djangoDat.id, djangoDat1.id);
+        $('#meter_month_details').on('dblclick', 'tr', function () {
+            var table = $('#meter_month_details').DataTable();
+            var data = table.row(this).data();
+            window.location = "/scrappers/datahub_meter_daily_details/" + djangoDat.id + "/" + String(data.Ts);
+        });
+        $(function () {
+            $("#helpbtn3").click(function () {
+                $("#customerhelp3").modal("show");
+            });
+        });
+        });
+    </script>
+
+
+{% endblock javascripts %}

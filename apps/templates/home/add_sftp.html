@@ -1,0 +1,137 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Roles {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+        <div class="row mt-4">
+            <div class="col-lg-9 col-12 mx-auto position-relative">
+                <form role="form" id="add_sftp_from">
+                    <div class="card">
+
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">New SFTP</h6>
+
+                            </div>
+                        </div>
+
+
+                        <div class="card-body pt-2">
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-12 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Customer Name</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="customer_name"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Username</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="username"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Password</label>
+                                        <input class="multisteps-form__input form-control" type="password" id="password"
+                                               name="password" required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+
+                                    </div>
+                                    <input type="checkbox" name="" onclick="showPassword()"> <small> &nbsp;Show
+                                    Password</small>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Server Directory</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="server_direc"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">User Directory </label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="user_direc"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Host</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="host"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Port </label>
+                                        <input class="multisteps-form__input form-control" type="number"
+                                               name="port"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div style="margin-top: 20px;" class="d-flex mt-5 justify-content-end p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <button type="submit" name="button" class="mr-4 btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#add_sftp_from').on('submit', function (e) {
+                e.preventDefault();
+                var data = $('#add_sftp_from').serializeArray().reduce(function (obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+                addSftpFrom(data);
+            });
+        });
+
+
+    </script>
+
+{% endblock javascripts %}

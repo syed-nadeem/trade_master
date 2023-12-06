@@ -1,0 +1,77 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Roles {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">User Roles</h6>
+                        </div>
+                    </div>
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table id="emp_list" class="table table-bordered table-striped dataTable">
+                                <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Username
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Email
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Status
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Roles
+                                    </th>
+                                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Actions
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+
+        $(document).ready(function () {
+            fill_roles_datatable();
+            $('#filter_grid').on('submit', function () {
+                exb_name = $(this).find('#exb_name').val();
+                email = $(this).find('#email').val();
+                table.destroy();
+                {#fill_roles_datatable(exb_name, email);#}
+                return false;
+            });
+            $(".reset-btn").click(function () {
+                table.destroy();
+                fill_roles_datatable();
+                return false;
+            });
+
+        });
+
+    </script>
+
+{% endblock javascripts %}

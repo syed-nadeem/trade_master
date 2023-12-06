@@ -1,0 +1,237 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Roles {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+        <div class="row mt-4">
+            <div class="col-lg-9 col-12 mx-auto position-relative">
+                <form role="form" id="add_scraper_from">
+                    <div class="card">
+
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">New Scrapper</h6>
+
+                            </div>
+                        </div>
+
+
+                        <div class="card-body pt-2">
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Name</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="name"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Customer</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="customer"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">URL</label>
+                                        <input class="multisteps-form__input form-control" type="url" name="url"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Country</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="country"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Username</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="username"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Password</label>
+                                        <input class="multisteps-form__input form-control" type="password" id="password"
+                                               name="password" required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+
+                                    </div>
+                                    <input type="checkbox" name="" onclick="showPassword()"> <small> &nbsp;Show
+                                    Password</small>
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Period</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="period"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Collection Name</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="collection_name"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Cron Time</label>
+                                        <input class="multisteps-form__input form-control" type="text" name="cron_time"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Aggregation Time</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="aggregation_time"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-sm-12 mt-3 mt-sm-0">
+                                    <div class="input-group input-group-dynamic">
+                                        <label class="form-label">Description</label>
+                                        <input class="multisteps-form__input form-control" type="text"
+                                               name="description"
+                                               required
+                                               onfocus="focused(this)" onfocusout="defocused(this)">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Cronjob
+                                        </label>
+                                        <p class="form-text text-muted ms-1">
+                                            Set yes if cron job added.
+                                        </p>
+                                        <div class="form-check form-switch ms-1">
+                                            <input class="form-check-input" type="checkbox" name="cronjob"
+                                                   onclick="notify(this)" data-type="warning"
+                                                   data-content="Once a project is made private, you cannot revert it to a public project."
+                                                   data-title="Warning" data-icon="ni ni-bell-55">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Displayed on app
+                                        </label>
+                                        <p class="form-text text-muted ms-1">
+                                            Set yes if displayed on app.
+                                        </p>
+                                        <div class="form-check form-switch ms-1">
+                                            <input class="form-check-input" type="checkbox" name="displayed_on_app"
+                                                   onclick="notify(this)" data-type="warning"
+                                                   data-content="Once a project is made private, you cannot revert it to a public project."
+                                                   data-title="Warning" data-icon="ni ni-bell-55">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Status
+                                        </label>
+                                        <select class="form-control form-control-sm" name="status">
+                                            <option value="completed">Completed</option>
+                                            <option value="in_progress">In_progress</option>
+                                            <option value="todo" selected>Todo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label>
+                                            Type
+                                        </label>
+
+                                        <select class="form-control form-control-sm" name="type">
+                                            <option value="water">Water</option>
+                                            <option value="electricity" selected>Electricity</option>
+                                            <option value="gas">Gas</option>
+                                            <option value="heating">Heating</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end p-0 position-relative mt-n4 mx-3 z-index-2">
+                            <button type="submit" name="button" class="mr-4 btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('#add_scraper_from').on('submit', function (e) {
+                e.preventDefault();
+                var data = $('#add_scraper_from').serializeArray().reduce(function (obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+                addScrapperFrom(data);
+            });
+        });
+
+
+    </script>
+
+{% endblock javascripts %}

@@ -1,0 +1,149 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Branches {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                    <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <h6 class="text-white text-capitalize ps-3">Git Branches</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-5"></div>
+                    <div class="col-md-2 mt-2 ml-2">
+                        <button id="fetch_branches" class="btn btn-success btn-block">Fetch All Branchs</button>
+                    </div>
+                </div>
+
+
+                <div class="card-body px-0 pb-2">
+                    <div class="row mt-4">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <h6>APP Current Branch : </h6>
+                        </div>
+                        <div class="col-md-2">
+                            <p id="current_branch"></p>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <h6>API Current Branch : </h6>
+                        </div>
+                        <div class="col-md-2">
+                            <p id="api_current_branch"></p>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-2">
+                            <h6 class="mt-2">APP Git Branches : </h6>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="branch_select" class="form-select form-select-lg mr-3 branch_s"
+                                    style="background-color: white;">
+                                {% for x in branches_list %}
+                                    <option value="{{ x }}">{{ x }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <h6 class="mt-2">API Git Branches : </h6>
+                        </div>
+                        <div class="col-md-2">
+                            <select id="api_branch_select" class="form-select form-select-lg mr-3 branch_s"
+                                    style="background-color: white;">
+                                {% for x in api_branches_list %}
+                                    <option value="{{ x }}">{{ x }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-1">
+                            <h6 class="mt-2">Domains : </h6>
+                        </div>
+                        <div class="col-md-2" style="margin-top: 5px;">
+                            <select id="domain_select" class="form-select form-select-lg mr-3 branch_s mt-2"
+                                    style="background-color: white;">
+                                {% for y in domain_list %}
+                                    <option value="{{ y }}">{{ y }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2"></div>
+
+
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row mt-6 mb-8">
+
+                        <center>
+                            <button id="change_branch" class="btn btn-primary">Change Branch</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+    <script>
+        $(document).ready(function () {
+            $('.branch_s').select2();
+
+
+            var domainName = $('#domain_select').find(":selected").val();
+
+            get_current_branch(domainName);
+            get_api_current_branch(domainName);
+
+            $('#domain_select').on('change', function (e) {
+                var optionSelected = $("option:selected", this);
+                var valueSelected = this.value;
+                get_current_branch(valueSelected);
+                get_api_current_branch(valueSelected);
+            });
+
+
+
+            $("#change_branch").click(function () {
+                var domainName = $('#domain_select').find(":selected").val();
+                var branchName = $('#branch_select').find(":selected").val();
+
+                var apiDomainName = $('#api_domain_select').find(":selected").val();
+                var apiBranchName = $('#api_branch_select').find(":selected").val();
+
+                change_branch(domainName, branchName, apiBranchName);
+            });
+
+            $("#fetch_branches").click(function () {
+                fetch_branches();
+            });
+
+        });
+    </script>
+
+{% endblock javascripts %}

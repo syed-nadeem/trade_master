@@ -1,0 +1,41 @@
+.spinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999999;
+  background-color: #666;
+}
+.spinner img {
+  position: fixed;
+  top: 55%;
+  left: 60%;
+  margin-left: -60px;
+  margin-top: -60px;
+  text-align: center;
+  z-index: 9999998;
+  overflow: auto;
+  /*width: 164px;
+  height: 164px;*/
+  width: 85px;
+  height: 85px;
+}
+
+.modal {
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrap_long_text {
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+td:hover .wrap_long_text {
+  overflow: visible;
+  white-space: normal;
+}

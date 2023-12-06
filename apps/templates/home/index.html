@@ -1,0 +1,262 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="container-fluid py-4" xmlns="http://www.w3.org/1999/html">
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div class="">
+                            <p class="text mb-0 text-capitalize">Total Registered Scrapers</p>
+                            <h5 class=" text-end mb-0">{{ total }}</h5>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a></center>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div class="">
+                            <p class="text mb-0 text-capitalize">Total Scrapers Run Today</p>
+                            <h5 class=" text-end mb-0">{{ total_today }}</h5>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a></center>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div class="">
+                            <p class="text mb-0 text-capitalize">Total Scrapers Successful Today</p>
+                            <h5 class=" text-end mb-0">{{ total_success }}</h5>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a></center>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6">
+                <div class="card">
+                    <div class="card-header p-3 pt-2">
+                        <div class="">
+                            <p class="text mb-0 text-capitalize">Total Scrapers Failed Today</p>
+                            <h5 class=" text-end mb-0">{{ total_failed }}</h5>
+                        </div>
+                    </div>
+                    <hr class="dark horizontal my-0">
+                    <center><a href="{% url 'home:scrapper_details' %}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a></center>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4 mt-4">
+
+            <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
+                <ul class="nav nav-tabs navnew-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button style="border-color: #fff;" class="nav-link active" id="scrapers-tab" data-bs-toggle="tab"
+                                data-bs-target="#scrapers" type="button" role="tab" aria-controls="scrapers"
+                                aria-selected="true">Scraper Logs
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button style="border-color: #fff;" class="nav-link" id="aggregations-tab" data-bs-toggle="tab"
+                                data-bs-target="#aggregations" type="button" role="tab" aria-controls="aggregations"
+                                aria-selected="false">Aggregation Logs
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="scrapers" role="tabpanel" aria-labelledby="scrapers-tab">
+                        <div class="card" style="height:500px; overflow-y: auto; overflow-x:hidden; border-radius: 0px;">
+                            <div class="card-header pb-0">
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-5 my-auto text-end">
+                                        <div class="dropdown float-lg-end pe-4">
+                                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
+                                                aria-labelledby="dropdownTable">
+                                                <li><a class="dropdown-item border-radius-md"
+                                                       href="javascript:;">Action</a>
+                                                </li>
+                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                    action</a></li>
+                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                    else
+                                                    here</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive table-new">
+                                    <table class="table align-items-center mb-0 table-new">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Scraper Name
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Status
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                LAST RUN AT
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Time
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Period
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for result in scrapper_info %}
+                                            <tr class="flowingdown">
+                                                <td>{{ result.scrapper_name }}</td>
+                                                <td class={% if result.status == 'Failed' %} text-danger {% else %}
+                                                    text-success {% endif %}
+                                                ">{{ result.status }}
+                                                <div style="color: grey"
+                                                     class="something-inside-but-hidden text-sm">{{ result.description }}</div>
+                                                </td>
+                                                <td>{{ result.created_at }}</td>
+                                                <td>{{ result.cron_time }}</td>
+                                                <td>{{ result.period }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="aggregations" role="tabpanel" aria-labelledby="aggregations-tab">
+                        <div class="card" style="height:500px; overflow-y: auto; overflow-x:hidden; border-radius: 0px;">
+                            <div class="card-header pb-0">
+                                <div class="row">
+                                    <div class="col-lg-6 col-5 my-auto text-end">
+                                        <div class="dropdown float-lg-end pe-4">
+                                            <ul class="dropdown-menu px-2 py-3 ms-sm-n4 ms-n5"
+                                                aria-labelledby="dropdownTable">
+                                                <li><a class="dropdown-item border-radius-md"
+                                                       href="javascript:;">Action</a>
+                                                </li>
+                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Another
+                                                    action</a></li>
+                                                <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
+                                                    else
+                                                    here</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive table-new">
+                                    <table class="table align-items-center mb-0 table-new">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Scraper Name
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Status
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                LAST RUN AT
+                                            </th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for result in aggreration_info %}
+                                            <tr class="flowingdown">
+                                                <td>{{ result.aggregation_name }}</td>
+                                                <td class={% if result.status == 'Failed' %} text-danger {% else %}
+                                                    text-success {% endif %}
+                                                ">{{ result.status }}
+                                                <div style="color: grey"
+                                                     class="something-inside-but-hidden text-sm">{{ result.description }}</div>
+                                                </td>
+                                                <td>{{ result.created_at }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-6">
+                <ul class="nav nav-tabs navnew-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button style="border-color: #fff;" class="nav-link active" id="scraperslist-tab" data-bs-toggle="tab"
+                                data-bs-target="#scraperslist" type="button" role="tab" aria-controls="scraperslist"
+                                aria-selected="true">All Scrapers
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="scraperslist" role="tabpanel"
+                         aria-labelledby="scraperslist-tab">
+                        <div class="card" style="height:500px; overflow-y: auto; overflow-x:hidden; border-radius: 0px;">
+                            {% for row in scrapper_list %}
+                                {% for key, value in row.items %}
+
+                                    <div style="margin-left: 25px;">
+
+                                        <h6 class="text-dark font-weight-bold">{{ key }}</h6>
+                                        <div style="margin-left: 25px;">
+                                            {% for scr in value %}
+                                                <p style="margin-bottom: 7px; padding-top:0;"><span
+                                                        class="text-dark">{{ scr.name }} </span> <span
+                                                        class="text-sm text-secondary"> ({{ scr.primary_responsible }}
+                                                    {% if scr.secondary_responsible %}
+                                                        , {% endif %} {{ scr.secondary_responsible }})</span></p>
+                                                {#                                        <p style="margin-top: 0; margin-bottom: 7px; padding-top:0;" class="text-secondary text-sm">{{ scr.collection_name }} </p>#}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        {% include 'includes/footer.html' %}
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <script src="{{ ASSETS_ROOT }}/js/plugins/chartjs.min.js"></script>
+
+{% endblock javascripts %}
