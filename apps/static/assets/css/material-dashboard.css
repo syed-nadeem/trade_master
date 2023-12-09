@@ -2477,16 +2477,16 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #000;
-  background-color: #e91e63;
-  border-color: #e91e63; }
+  background-color: orange;
+  border-color: orange; }
   .btn-primary:hover {
     color: #000;
-    background-color: #ec407a;
-    border-color: #eb3573; }
+    background-color: orangered;
+    border-color: orangered; }
   .btn-check:focus + .btn-primary, .btn-primary:focus {
     color: #000;
-    background-color: #ec407a;
-    border-color: #eb3573;
+    background-color: orangered;
+    border-color: orangered;
     box-shadow: 0 0 0 0.2rem rgba(198, 26, 84, 0.5); }
   .btn-check:checked + .btn-primary,
   .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active,

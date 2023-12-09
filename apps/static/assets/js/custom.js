@@ -34,14 +34,7 @@ function deleteUser(id) {
         if (result.value) {
             _preloader('show');
             $.ajax({
-                url: "/delete_user/" + id, context: document.body, error: function (response, status, error) {
-                    if (response.status == 404) {
-                        setSwal(status.toUpperCase(), error.toUpperCase(), 2);
-                    } else {
-                        setSwal("Oops...", "Something went wrong.", 2);
-                    }
-                    _preloader('hide');
-                },
+                url: "/delete_user/" + id, context: document.body,
                 success: function (response) {
                     _preloader('hide');
                     var json = JSON.parse(JSON.stringify(response));
@@ -51,13 +44,12 @@ function deleteUser(id) {
                         setSwal(json.message_type.toUpperCase(), json.message, 2);
                     }
 
-                    $('#emp_list').DataTable().ajax.reload();
+                    $('#users').DataTable().ajax.reload();
                 },
                 error: function (error) {
                     _preloader('hide');
                     var json = error.responseJSON
                     setSwal(json.message_type.toUpperCase(), json.message, 2);
-
 
                 }
             });
@@ -76,7 +68,7 @@ function fill_users_datatable() {
         "paging": true,
         "pagingType": 'full_numbers',
 
-        "ajax":{
+        "ajax": {
             'url': "/get_all_users",
             'type': "GET",
         },
@@ -155,9 +147,11 @@ function deleteSftp(id) {
             _preloader('hide');
             window.location = 'sftp_details';
         },
-        error: function (data) {
+        error: function (error) {
             _preloader('hide');
-            alert("Something went wrong!");
+            var json = error.responseJSON
+            setSwal(json.message_type.toUpperCase(), json.message, 2);
+
         }
 
     })
@@ -197,15 +191,22 @@ function showPassword() {
     }
 }
 
-function addSftpFrom(data) {
+function add_user_from(data) {
     _preloader('show');
     $.ajax({
-        method: "POST", url: "/add_sftp_details", data: data, dataType: "json", dataSrc: "", success: function (data) {
+        method: "POST", url: "/add_sftp_form", data: data, dataType: "json", dataSrc: "",
+        success: function (response) {
             _preloader('hide');
-            window.location = 'sftp_details';
-        }, error: function (data) {
+            var json = JSON.parse(JSON.stringify(response));
+            if (response.status == 200) {
+                setSwal(json.message_type.toUpperCase(), json.message, 1);
+            }
+            window.location("/users")
+
+        }, error: function (error) {
             _preloader('hide');
-            alert("Something went wrong!");
+            var json = error.responseJSON
+            setSwal(json.message_type.toUpperCase(), json.message, 2);
         }
 
     })

@@ -2,12 +2,13 @@ from django.http import HttpResponse, JsonResponse
 from django.template import loader
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
 def index(request):
     context = {'page': 'Dashboard', 'segment': 'index'}
-
+    context["current_user"] = request.user
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
@@ -24,10 +25,19 @@ def profile(request):
 def users(request):
     context = {'page': 'Users', 'segment': 'users'}
     context["current_user"] = request.user
-    html_template = loader.get_template('home/roles.html')
+    html_template = loader.get_template('home/users.html')
     return HttpResponse(html_template.render(context, request))
 
 
+@login_required
+def add_user(request):
+    context = {'page': 'Add User', 'segment': 'users'}
+    context["current_user"] = request.user
+    html_template = loader.get_template('home/add_user.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+@login_required
 def get_all_users(request):
     context = {}
     try:
@@ -64,5 +74,31 @@ def delete_user(request, user_id):
     except Exception as e:
         response["message"] = str(e)
         response["message_type"] = "error"
-        response["status"] = 404
-        return JsonResponse(response, status=404, safe=False)
+        response["status"] = 400
+        return JsonResponse(response, status=400, safe=False)
+
+
+def add_sftp_form(request):
+    try:
+        context = {}
+        email = request.POST.get("email", None)
+        first_name = request.POST.get("first_name", None)
+        last_name = request.POST.get("last_name", None)
+        password = request.POST.get("password", None)
+
+        user = User.objects.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            username=email,
+            email=email,
+            password=password)
+        context['message'] = "scrapper added successfully"
+        context['status'] = 200
+        context['message_type'] = "success"
+
+        return JsonResponse(context, status=200, safe=False)
+    except Exception as e:
+        context['message'] = "User with email already exists"
+        context['message_type'] = "error"
+        context['status'] = 400
+        return JsonResponse(context, status=400, safe=False)
