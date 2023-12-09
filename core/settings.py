@@ -12,7 +12,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True # if os.environ.get('DEBUG', 'False') == 'False' else True
 ASSETS_ROOT = os.environ.get('ASSETS_ROOT', '/static/assets')
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',

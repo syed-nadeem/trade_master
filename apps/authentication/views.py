@@ -14,7 +14,6 @@ def login_view(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             remember_me = form.cleaned_data.get("remember_me")
-            print(remember_me)
             user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request, user)
